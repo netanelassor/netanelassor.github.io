@@ -775,7 +775,7 @@ function WeatherWeekViewComponent_ng_container_1_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "mat-icon", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h3", 17);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Loading...");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Please Allow Chrome to access this device's location...");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "app-weather-icon");
@@ -805,10 +805,18 @@ class WeatherWeekViewComponent {
                 }, error => {
                     this.showToast(error.message, false);
                 });
+            }, () => {
+                console.log('location not allowed on the current device');
+                this.selectedLocation = this.weatherService.defaultLocation;
+                this.updateLocation(this.selectedLocation);
+                this.isDataReady = true;
             });
         }
         else {
+            console.log('browser not support find location');
             this.selectedLocation = this.weatherService.defaultLocation;
+            this.updateLocation(this.selectedLocation);
+            this.isDataReady = true;
         }
     }
     getSelectedLocation(location) {

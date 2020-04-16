@@ -1593,7 +1593,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "h3", 17);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Loading...");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "Please Allow Chrome to access this device's location...");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1642,9 +1642,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }, function (error) {
                 _this3.showToast(error.message, false);
               });
+            }, function () {
+              console.log('location not allowed on the current device');
+              _this3.selectedLocation = _this3.weatherService.defaultLocation;
+
+              _this3.updateLocation(_this3.selectedLocation);
+
+              _this3.isDataReady = true;
             });
           } else {
+            console.log('browser not support find location');
             this.selectedLocation = this.weatherService.defaultLocation;
+            this.updateLocation(this.selectedLocation);
+            this.isDataReady = true;
           }
         }
       }, {
